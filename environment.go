@@ -1,6 +1,7 @@
 package script
 
 import (
+	"fmt"
 	"os"
 	"regexp"
 	"strings"
@@ -70,4 +71,12 @@ func (env Environment) Expand(line string) string {
 	}
 	ret += line[lastidx:]
 	return ret
+}
+
+func (env Environment) Array() []string {
+	r := make([]string, len(env))
+	for k, v := range env {
+		r = append(r, fmt.Sprintf("%s=%s", k, v))
+	}
+	return r
 }

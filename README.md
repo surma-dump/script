@@ -4,13 +4,13 @@
 	ctx, _ := script.NewContext("/home/git/repositories")
 	ctx.Environment.Add(script.DefaultEnvironment)
 	for _, file := range ctx.Glob("*") {
-		ctx, _ = ctx.Subcontext(file)
-		e := ctx.Eat(ctx.Run("git clone . /tmp/%s/goroot/src/%s", file.ShellFullname())
+		ctx, _ = ctx.Cd(file.Path())
+		_, e := ctx.Run("git clone . /tmp/%s/goroot/src/%s", file.ShellFullname()
 		if e != nil {
 			// Handling
 		}
 		ctx = ctx.Cd("/tmp/%s/goroot/src/%s", file.ShellFullname(), file.Shellname())
-		e = ctx.Eat(ctx.Run("go get ."))
+		_, e = ctx.Run("go get .")
 		if e != nil {
 			// Handling
 		}
