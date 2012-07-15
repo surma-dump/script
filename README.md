@@ -2,7 +2,7 @@
 
 ```Go
 	ctx, _ := script.NewContext("/home/git/repositories")
-	ctx.Environment.CopyDefault()
+	ctx.Environment.Add(script.DefaultEnvironment)
 	for _, file := range ctx.Glob("*") {
 		ctx, _ = ctx.Subcontext(file)
 		e := ctx.Eat(ctx.Run("git clone . /tmp/%s/goroot/src/%s", file.ShellFullname())

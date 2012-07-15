@@ -9,13 +9,13 @@ func ExampleShellSplit() {
 	var params []string
 	params, _ = ShellSplit(`echo a b c`)
 	fmt.Printf("%#v\n", params)
-	// Excessive spacing, tabbing and quoting
+	// Excessive spacing, tabbing, quoting and escaping
 	params, _ = ShellSplit(`    echo      "longer parameter 1"` +
-		`		small_param2          "another long \"weird\" parameter"    `)
+		`		small\ param2          "another long \"weird\" parameter"    `)
 	fmt.Printf("%#v\n", params)
 	// Output:
 	// []string{"echo", "a", "b", "c"}
-	// []string{"echo", "longer parameter 1", "small_param2", "another long \"weird\" parameter"}
+	// []string{"echo", "longer parameter 1", "small param2", "another long \"weird\" parameter"}
 }
 
 func ExampleEnvironment_Expand() {
